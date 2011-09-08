@@ -22,12 +22,6 @@
 
 /* Begin PBXBuildFile section */
 		13F8B89007B43554008AE28D /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD92D38A0106425D02CA0E72 /* Cocoa.framework */; };
-		4926EE7514193CA4005612AE /* PSMTabBarControlDemo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4926EE26141938F2005612AE /* PSMTabBarControlDemo.xib */; };
-		4926EE7614193CA4005612AE /* DemoWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4926EE211419388F005612AE /* DemoWindow.xib */; };
-		4926EE7714193CC0005612AE /* demo_main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4926EE24141938D1005612AE /* demo_main.m */; };
-		4926EE7814193CC0005612AE /* DemoAppController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4926EE1E1419388F005612AE /* DemoAppController.m */; };
-		4926EE7914193CC0005612AE /* DemoFakeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4926EE201419388F005612AE /* DemoFakeModel.m */; };
-		4926EE7A14193CC0005612AE /* DemoWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4926EE231419388F005612AE /* DemoWindowController.m */; };
 		4926EE7B14193DC7005612AE /* PSMTabBarControl.h in Headers */ = {isa = PBXBuildFile; fileRef = 4926EE6414193A9C005612AE /* PSMTabBarControl.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4926EE7C14193DC7005612AE /* PSMOverflowPopUpButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 4926EE5C14193A7D005612AE /* PSMOverflowPopUpButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4926EE7D14193DC7005612AE /* PSMTabBarCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 4926EE6214193A7D005612AE /* PSMTabBarCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -129,16 +123,7 @@
 		13F8B88807B434F6008AE28D /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		13F8B88907B434F6008AE28D /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
 		13F8B88A07B434F6008AE28D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
-		4926EE1D1419388F005612AE /* DemoAppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DemoAppController.h; path = Demo/DemoAppController.h; sourceTree = "<group>"; };
-		4926EE1E1419388F005612AE /* DemoAppController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DemoAppController.m; path = Demo/DemoAppController.m; sourceTree = "<group>"; };
-		4926EE1F1419388F005612AE /* DemoFakeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DemoFakeModel.h; path = Demo/DemoFakeModel.h; sourceTree = "<group>"; };
-		4926EE201419388F005612AE /* DemoFakeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DemoFakeModel.m; path = Demo/DemoFakeModel.m; sourceTree = "<group>"; };
-		4926EE211419388F005612AE /* DemoWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DemoWindow.xib; path = Demo/DemoWindow.xib; sourceTree = "<group>"; };
-		4926EE221419388F005612AE /* DemoWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DemoWindowController.h; path = Demo/DemoWindowController.h; sourceTree = "<group>"; };
-		4926EE231419388F005612AE /* DemoWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DemoWindowController.m; path = Demo/DemoWindowController.m; sourceTree = "<group>"; };
-		4926EE24141938D1005612AE /* demo_main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = demo_main.m; path = Demo/demo_main.m; sourceTree = "<group>"; };
 		4926EE25141938F2005612AE /* PSMTabBarControlDemo-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "PSMTabBarControlDemo-Info.plist"; path = "Demo/PSMTabBarControlDemo-Info.plist"; sourceTree = "<group>"; };
-		4926EE26141938F2005612AE /* PSMTabBarControlDemo.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PSMTabBarControlDemo.xib; path = Demo/PSMTabBarControlDemo.xib; sourceTree = "<group>"; };
 		4926EE2714193919005612AE /* AquaTabsDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = AquaTabsDown.png; path = Source/Images/AquaTabsDown.png; sourceTree = "<group>"; };
 		4926EE2814193919005612AE /* AquaTabsDownGraphite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = AquaTabsDownGraphite.png; path = Source/Images/AquaTabsDownGraphite.png; sourceTree = "<group>"; };
 		4926EE2914193919005612AE /* AquaTabsDownNonKey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = AquaTabsDownNonKey.png; path = Source/Images/AquaTabsDownNonKey.png; sourceTree = "<group>"; };
@@ -204,6 +189,15 @@
 		4926EE6E14193A9C005612AE /* PSMTabDragWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PSMTabDragWindowController.h; path = Source/PSMTabDragWindowController.h; sourceTree = "<group>"; };
 		4926EE6F14193A9C005612AE /* PSMTabDragWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PSMTabDragWindowController.m; path = Source/PSMTabDragWindowController.m; sourceTree = "<group>"; };
 		4926EE7014193B28005612AE /* PSMTabBarControl-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "PSMTabBarControl-Info.plist"; sourceTree = "<group>"; };
+		4926EEBC14193FCD005612AE /* AppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppController.h; path = Demo/AppController.h; sourceTree = "<group>"; };
+		4926EEBD14193FCD005612AE /* AppController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppController.m; path = Demo/AppController.m; sourceTree = "<group>"; };
+		4926EEBE14193FCD005612AE /* FakeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FakeModel.h; path = Demo/FakeModel.h; sourceTree = "<group>"; };
+		4926EEBF14193FCD005612AE /* FakeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FakeModel.m; path = Demo/FakeModel.m; sourceTree = "<group>"; };
+		4926EEC014193FCD005612AE /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Demo/main.m; sourceTree = "<group>"; };
+		4926EEC114193FCD005612AE /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainMenu.xib; path = Demo/MainMenu.xib; sourceTree = "<group>"; };
+		4926EEC214193FCD005612AE /* Window.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = Window.xib; path = Demo/Window.xib; sourceTree = "<group>"; };
+		4926EEC314193FCD005612AE /* WindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WindowController.h; path = Demo/WindowController.h; sourceTree = "<group>"; };
+		4926EEC414193FCD005612AE /* WindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WindowController.m; path = Demo/WindowController.m; sourceTree = "<group>"; };
 		53DF68FD067E5B5A0090B5B0 /* PSMTabBarControl.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PSMTabBarControl.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BD4395A1185147D00DB4AC3 /* PSMTabBarControlDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PSMTabBarControlDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0D069550A49DF9100C95564 /* InterfaceBuilderKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = InterfaceBuilderKit.framework; path = /Developer/Library/Frameworks/InterfaceBuilderKit.framework; sourceTree = "<absolute>"; };
@@ -357,16 +351,16 @@
 		8BD439551185146A00DB4AC3 /* Demo */ = {
 			isa = PBXGroup;
 			children = (
+				4926EEBC14193FCD005612AE /* AppController.h */,
+				4926EEBD14193FCD005612AE /* AppController.m */,
+				4926EEBE14193FCD005612AE /* FakeModel.h */,
+				4926EEBF14193FCD005612AE /* FakeModel.m */,
+				4926EEC014193FCD005612AE /* main.m */,
+				4926EEC114193FCD005612AE /* MainMenu.xib */,
+				4926EEC214193FCD005612AE /* Window.xib */,
+				4926EEC314193FCD005612AE /* WindowController.h */,
+				4926EEC414193FCD005612AE /* WindowController.m */,
 				4926EE25141938F2005612AE /* PSMTabBarControlDemo-Info.plist */,
-				4926EE26141938F2005612AE /* PSMTabBarControlDemo.xib */,
-				4926EE24141938D1005612AE /* demo_main.m */,
-				4926EE1D1419388F005612AE /* DemoAppController.h */,
-				4926EE1E1419388F005612AE /* DemoAppController.m */,
-				4926EE1F1419388F005612AE /* DemoFakeModel.h */,
-				4926EE201419388F005612AE /* DemoFakeModel.m */,
-				4926EE211419388F005612AE /* DemoWindow.xib */,
-				4926EE221419388F005612AE /* DemoWindowController.h */,
-				4926EE231419388F005612AE /* DemoWindowController.m */,
 			);
 			name = Demo;
 			sourceTree = "<group>";
@@ -535,8 +529,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4926EE7514193CA4005612AE /* PSMTabBarControlDemo.xib in Resources */,
-				4926EE7614193CA4005612AE /* DemoWindow.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -571,10 +563,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4926EE7714193CC0005612AE /* demo_main.m in Sources */,
-				4926EE7814193CC0005612AE /* DemoAppController.m in Sources */,
-				4926EE7914193CC0005612AE /* DemoFakeModel.m in Sources */,
-				4926EE7A14193CC0005612AE /* DemoWindowController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
