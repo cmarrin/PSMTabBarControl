@@ -17,6 +17,14 @@
 
 @implementation WindowController
 
+- (NSString*)nextContentImageName
+{
+    NSString* s = [NSString stringWithFormat:@"%@%d", CONTENT_IMAGE_PREFIX, contentImageIndex++];
+    if (contentImageIndex >= CONTENT_IMAGE_COUNT)
+        contentImageIndex = 0;
+    return s;
+}
+
 - (void)awakeFromNib {
 	[[NSUserDefaults standardUserDefaults] registerDefaults:
 	 [NSDictionary dictionaryWithObjectsAndKeys:
@@ -70,13 +78,6 @@
 	[[tabView tabViewItemAtIndex:0] setLabel:@"Tab"];
 	[[tabView tabViewItemAtIndex:1] setLabel:@"Bar"];
 	[[tabView tabViewItemAtIndex:2] setLabel:@"Control"];
-    NSRect tabViewBounds = [[[tabView tabViewItemAtIndex:0] view] bounds];
-    [[tabView tabViewItemAtIndex:0] setView:[[NSImageView alloc] initWithFrame:tabViewBounds]];
-    [[[tabView tabViewItemAtIndex:0] view] setImage:[NSImage imageNamed:@"mcqueen_large"]];
-    [[tabView tabViewItemAtIndex:1] setView:[[NSImageView alloc] initWithFrame:tabViewBounds]];
-    [[[tabView tabViewItemAtIndex:1] view] setImage:[NSImage imageNamed:@"mater_large"]];
-    [[tabView tabViewItemAtIndex:2] setView:[[NSImageView alloc] initWithFrame:tabViewBounds]];
-    [[[tabView tabViewItemAtIndex:2] view] setImage:[NSImage imageNamed:@"sally_large"]];
 }
 
 - (IBAction)addNewTab:(id)sender {
@@ -86,6 +87,11 @@
 	[tabView addTabViewItem:newItem];
 	[tabView selectTabViewItem:newItem]; // this is optional, but expected behavior
 	[newModel release];
+
+    // Add a dummy image
+    NSRect tabViewBounds = [[newItem view] bounds];
+    [newItem setView:[[NSImageView alloc] initWithFrame:tabViewBounds]];
+    [[newItem view] setImage:[NSImage imageNamed:[self nextContentImageName]]];
 }
 
 - (IBAction)closeTab:(id)sender {

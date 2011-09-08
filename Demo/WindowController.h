@@ -9,6 +9,8 @@
 #import <Cocoa/Cocoa.h>
 @class PSMTabBarControl;
 
+#define CONTENT_IMAGE_COUNT 9
+#define CONTENT_IMAGE_PREFIX @"space_"
 
 @interface WindowController : NSWindowController <NSToolbarDelegate> {
 	IBOutlet NSTabView					*tabView;
@@ -36,6 +38,8 @@
 	IBOutlet NSTextField					*textField_minWidth;
 	IBOutlet NSTextField					*textField_maxWidth;
 	IBOutlet NSTextField					*textField_optimumWidth;
+    
+    int contentImageIndex;
 }
 
 - (void)addDefaultTabs;
