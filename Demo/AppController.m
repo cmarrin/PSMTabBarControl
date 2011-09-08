@@ -1,8 +1,8 @@
-#import "DemoAppController.h"
-#import "DemoWindowController.h"
+#import "AppController.h"
+#import "WindowController.h"
 
 
-@implementation DemoAppController
+@implementation AppController
 
 - (void)applicationDidFinishLaunching:(NSNotification *)pNotification {
 	[self newWindow:self];
@@ -13,7 +13,7 @@
 }
 - (IBAction)newWindow:(id)sender {
 	// put up a window
-	DemoWindowController *newWindow = [[DemoWindowController alloc] initWithWindowNibName:@"DemoWindow"];
+	WindowController *newWindow = [[WindowController alloc] initWithWindowNibName:@"Window"];
 	[newWindow showWindow:self];
 	[newWindow addDefaultTabs];
 }

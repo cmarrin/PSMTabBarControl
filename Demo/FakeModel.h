@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 
 
-@interface DemoFakeModel : NSObject {
+@interface FakeModel : NSObject {
 	BOOL						_isProcessing;
 	NSImage					*_icon;
 	NSString					*_iconName;

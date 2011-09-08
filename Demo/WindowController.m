@@ -6,16 +6,16 @@
 //  Copyright 2006 Positive Spin Media. All rights reserved.
 //
 
-#import "DemoWindowController.h"
-#import "DemoFakeModel.h"
+#import "WindowController.h"
+#import "FakeModel.h"
 #import "PSMTabBarControl.h"
 #import "PSMTabStyle.h"
 
-@interface DemoWindowController (PRIVATE)
+@interface WindowController (PRIVATE)
 - (void)configureTabBarInitially;
 @end
 
-@implementation DemoWindowController
+@implementation WindowController
 
 - (void)awakeFromNib {
 	[[NSUserDefaults standardUserDefaults] registerDefaults:
@@ -30,7 +30,7 @@
 		  nil]];
 
 	// toolbar
-	NSToolbar *toolbar = [[NSToolbar alloc] initWithIdentifier:@"DemoToolbar"];
+	NSToolbar *toolbar = [[NSToolbar alloc] initWithIdentifier:@"Toolbar"];
 	[toolbar setDelegate:self];
 	[toolbar setAllowsUserCustomization:YES];
 	[toolbar setAutosavesConfiguration:YES];
@@ -80,7 +80,7 @@
 }
 
 - (IBAction)addNewTab:(id)sender {
-	DemoFakeModel *newModel = [[DemoFakeModel alloc] init];
+	FakeModel *newModel = [[FakeModel alloc] init];
 	NSTabViewItem *newItem = [[(NSTabViewItem*)[NSTabViewItem alloc] initWithIdentifier:newModel] autorelease];
 	[newItem setLabel:@"Untitled"];
 	[tabView addTabViewItem:newItem];
@@ -422,7 +422,7 @@
 	NSLog(@"newTabBarForDraggedTabViewItem: %@ atPoint: %@", [tabViewItem label], NSStringFromPoint(point));
 
 	//create a new window controller with no tab items
-	DemoWindowController *controller = [[DemoWindowController alloc] initWithWindowNibName:@"DemoWindow"];
+	WindowController *controller = [[WindowController alloc] initWithWindowNibName:@"Window"];
 	id <PSMTabStyle> style = (id <PSMTabStyle>)[(PSMTabBarControl*)[aTabView delegate] style];
 
 	NSRect windowFrame = [[controller window] frame];

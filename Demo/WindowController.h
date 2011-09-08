@@ -10,7 +10,7 @@
 @class PSMTabBarControl;
 
 
-@interface DemoWindowController : NSWindowController <NSToolbarDelegate> {
+@interface WindowController : NSWindowController <NSToolbarDelegate> {
 	IBOutlet NSTabView					*tabView;
 	IBOutlet NSTextField					*tabField;
 	IBOutlet NSDrawer						*drawer;

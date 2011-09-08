@@ -6,13 +6,13 @@
 //  Copyright 2005 Positive Spin Media. All rights reserved.
 //
 
-#import "DemoFakeModel.h"
+#import "FakeModel.h"
 
 
-@implementation DemoFakeModel
+@implementation FakeModel
 
 - (id)init {
-	if((self == [super init])) {
+	if(self == [super init]) {
 		_isProcessing = NO;
 		_icon = nil;
 		_iconName = nil;
