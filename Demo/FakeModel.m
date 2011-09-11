@@ -16,7 +16,7 @@
 		_isProcessing = NO;
 		_icon = nil;
 		_iconName = nil;
-		_objectCount = 2;
+		_objectCount = 0;
 		_isEdited = NO;
 	}
 	return self;
