@@ -119,6 +119,7 @@
 	// default config
 	_currentStep = kPSMIsNotBeingResized;
 	_orientation = PSMTabBarHorizontalOrientation;
+	_onlyShowCloseOnHover = NO;
 	_canCloseOnlyTab = NO;
 	_disableTabClose = NO;
 	_showAddTabButton = NO;
@@ -385,6 +386,15 @@
 		[self _positionOverflowMenu]; //move the overflow popup button to the right place
 		[self update:NO];
 	}
+}
+
+- (BOOL)onlyShowCloseOnHover {
+	return _onlyShowCloseOnHover;
+}
+
+- (void)setOnlyShowCloseOnHover:(BOOL)value {
+	_onlyShowCloseOnHover = value;
+    [self update];
 }
 
 - (BOOL)canCloseOnlyTab {
@@ -1748,6 +1758,7 @@
 		[aCoder encodeObject:_addTabButton forKey:@"PSMaddTabButton"];
 		[aCoder encodeObject:style forKey:@"PSMstyle"];
 		[aCoder encodeInteger:_orientation forKey:@"PSMorientation"];
+		[aCoder encodeBool:_onlyShowCloseOnHover forKey:@"PSMonlyShowCloseOnHover"];
 		[aCoder encodeBool:_canCloseOnlyTab forKey:@"PSMcanCloseOnlyTab"];
 		[aCoder encodeBool:_disableTabClose forKey:@"PSMdisableTabClose"];
 		[aCoder encodeBool:_hideForSingleTab forKey:@"PSMhideForSingleTab"];
@@ -1789,6 +1800,7 @@
 			_addTabButton = [[aDecoder decodeObjectForKey:@"PSMaddTabButton"] retain];
 			style = [[aDecoder decodeObjectForKey:@"PSMstyle"] retain];
 			_orientation = (PSMTabBarOrientation)[aDecoder decodeIntegerForKey:@"PSMorientation"];
+			_onlyShowCloseOnHover = [aDecoder decodeBoolForKey:@"PSMonlyShowCloseOnHover"];
 			_canCloseOnlyTab = [aDecoder decodeBoolForKey:@"PSMcanCloseOnlyTab"];
 			_disableTabClose = [aDecoder decodeBoolForKey:@"PSMdisableTabClose"];
 			_hideForSingleTab = [aDecoder decodeBoolForKey:@"PSMhideForSingleTab"];

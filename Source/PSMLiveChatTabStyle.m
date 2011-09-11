@@ -384,7 +384,7 @@
 	labelRect.size.height = s.height;
 
 	// close button
-	if([cell hasCloseButton] && ![cell isCloseButtonSuppressed]) {
+	if([cell hasCloseButton] && ![cell isCloseButtonSuppressed] && ([cell isHighlighted] || ![tabBar onlyShowCloseOnHover])) {
 		NSSize closeButtonSize = NSZeroSize;
 		NSRect closeButtonRect = [cell closeButtonRectForFrame:cellFrame];
 		NSImage * closeButton = nil;

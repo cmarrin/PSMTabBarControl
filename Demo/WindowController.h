@@ -27,6 +27,7 @@
 	IBOutlet NSPopUpButton				*popUp_style;
 	IBOutlet NSPopUpButton				*popUp_orientation;
 	IBOutlet NSPopUpButton				*popUp_tearOff;
+	IBOutlet NSButton						*button_onlyShowCloseOnHover;
 	IBOutlet NSButton						*button_canCloseOnlyTab;
 	IBOutlet NSButton						*button_disableTabClosing;
 	IBOutlet NSButton						*button_hideForSingleTab;
@@ -62,6 +63,7 @@
 - (IBAction)configStyle:(id)sender;
 - (IBAction)configOrientation:(id)sender;
 - (IBAction)configCanCloseOnlyTab:(id)sender;
+- (IBAction)configOnlyShowCloseOnHover:(id)sender;
 - (IBAction)configDisableTabClose:(id)sender;
 - (IBAction)configHideForSingleTab:(id)sender;
 - (IBAction)configAddTabButton:(id)sender;

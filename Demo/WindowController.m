@@ -199,6 +199,13 @@
 	 forKey:@"Orientation"];
 }
 
+- (void)configOnlyShowCloseOnHover:(id)sender {
+	[tabBar setOnlyShowCloseOnHover:[sender state]];
+
+	[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:[sender state]]
+	 forKey:@"OnlyShowCloserOnHover"];
+}
+
 - (void)configCanCloseOnlyTab:(id)sender {
 	[tabBar setCanCloseOnlyTab:[sender state]];
 
@@ -515,6 +522,7 @@
 	[popUp_orientation selectItemWithTitle:[defaults stringForKey:@"Orientation"]];
 	[popUp_tearOff selectItemWithTitle:[defaults stringForKey:@"Tear-Off"]];
 
+	[button_onlyShowCloseOnHover setState:[defaults boolForKey:@"OnlyShowCloseOnHover"]];
 	[button_canCloseOnlyTab setState:[defaults boolForKey:@"CanCloseOnlyTab"]];
 	[button_disableTabClosing setState:[defaults boolForKey:@"DisableTabClosing"]];
 	[button_hideForSingleTab setState:[defaults boolForKey:@"HideForSingleTab"]];
@@ -526,6 +534,7 @@
 
 	[self configStyle:popUp_style];
 	[self configOrientation:popUp_orientation];
+	[self configOnlyShowCloseOnHover:button_onlyShowCloseOnHover];
 	[self configCanCloseOnlyTab:button_canCloseOnlyTab];
 	[self configDisableTabClose:button_disableTabClosing];
 	[self configHideForSingleTab:button_hideForSingleTab];

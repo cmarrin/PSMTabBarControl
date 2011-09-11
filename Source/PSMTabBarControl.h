@@ -74,6 +74,7 @@ enum {
 
 	// drawing style
 	id<PSMTabStyle>							style;
+	BOOL										_onlyShowCloseOnHover;
 	BOOL										_canCloseOnlyTab;
 	BOOL										_disableTabClose;
 	BOOL										_hideForSingleTab;
@@ -126,6 +127,8 @@ enum {
 // control configuration
 - (PSMTabBarOrientation)orientation;
 - (void)setOrientation:(PSMTabBarOrientation)value;
+- (BOOL)onlyShowCloseOnHover;
+- (void)setOnlyShowCloseOnHover:(BOOL)value;
 - (BOOL)canCloseOnlyTab;
 - (void)setCanCloseOnlyTab:(BOOL)value;
 - (BOOL)disableTabClose;

@@ -374,8 +374,8 @@
 {
     NSRect cellFrame = [cell frame];
 
-    // close button - only show if mouse over cell
-    if ([cell hasCloseButton] && ![cell isCloseButtonSuppressed]) {
+    // close button
+    if ([cell hasCloseButton] && ![cell isCloseButtonSuppressed] && ([cell isHighlighted] || ![tabBar onlyShowCloseOnHover])) {
         NSSize closeButtonSize = NSZeroSize;
         NSRect closeButtonRect = [cell closeButtonRectForFrame:cellFrame];
         NSImage *closeButton = nil;

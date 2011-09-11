@@ -547,7 +547,7 @@
 		break;
 	}
 
-	if([self closeButtonIsEnabledForCell:cell]) {
+	if([self closeButtonIsEnabledForCell:cell] && ([cell isHighlighted] || ![tabBar onlyShowCloseOnHover])) {
 		/* The close button and the icon (if present) are drawn combined, changing on-hover */
 		NSRect closeButtonRect = [cell closeButtonRectForFrame:cellFrame];
 		NSRect iconRect = [self iconRectForTabCell:cell];
