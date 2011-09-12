@@ -324,12 +324,45 @@
 - (void)drawTabCell:(PSMTabBarCell *)cell {
     NSRect cellFrame = [cell frame];	
     NSColor *lineColor = [NSColor darkGrayColor];
+    
     NSBezierPath *bezier = [NSBezierPath bezierPath];
-
+    
+    NSRect tabRect = cellFrame;
+    
+    NSPoint p0 = NSMakePoint(tabRect.origin.x, tabRect.origin.y);
+    NSPoint pc0 = NSMakePoint(tabRect.origin.x + 2, tabRect.origin.y);
+    NSPoint pc1 = NSMakePoint(tabRect.origin.x + 5, tabRect.origin.y + 3);
+    NSPoint p1 = NSMakePoint(tabRect.origin.x + 5, tabRect.origin.y + 5);
+    
+    NSPoint p2 = NSMakePoint(tabRect.origin.x + 5, tabRect.origin.y + tabRect.size.height - 5);
+    NSPoint pc2 = NSMakePoint(tabRect.origin.x + 5, tabRect.origin.y + tabRect.size.height - 3);
+    NSPoint pc3 = NSMakePoint(tabRect.origin.x + 8, tabRect.origin.y + tabRect.size.height);
+    NSPoint p3 = NSMakePoint(tabRect.origin.x + 10, tabRect.origin.y + tabRect.size.height);
+    
+    NSPoint p4 = NSMakePoint(tabRect.origin.x + tabRect.size.width - 10, tabRect.origin.y + tabRect.size.height);
+    NSPoint pc4 = NSMakePoint(tabRect.origin.x + tabRect.size.width - 8, tabRect.origin.y + tabRect.size.height);
+    NSPoint pc5 = NSMakePoint(tabRect.origin.x + tabRect.size.width - 5, tabRect.origin.y + tabRect.size.height - 3);
+    NSPoint p5 = NSMakePoint(tabRect.origin.x + tabRect.size.width - 5, tabRect.origin.y + tabRect.size.height - 5);
+    
+    NSPoint p6 = NSMakePoint(tabRect.origin.x + tabRect.size.width - 5, tabRect.origin.y + 5);
+    NSPoint pc6 = NSMakePoint(tabRect.origin.x + tabRect.size.width - 5, tabRect.origin.y + 3);
+    NSPoint pc7 = NSMakePoint(tabRect.origin.x + tabRect.size.width - 2, tabRect.origin.y);
+    NSPoint p7 = NSMakePoint(tabRect.origin.x + tabRect.size.width, tabRect.origin.y);
+    
+    [bezier moveToPoint:p0];
+    [bezier curveToPoint:p1 controlPoint1:pc0 controlPoint2:pc1];
+    [bezier lineToPoint:p2];
+    
+    [bezier curveToPoint:p3 controlPoint1:pc2 controlPoint2:pc3];
+    [bezier lineToPoint:p4];
+    
+    [bezier curveToPoint:p5 controlPoint1:pc4 controlPoint2:pc5];
+    [bezier lineToPoint:p6];
+    
+    [bezier curveToPoint:p7 controlPoint1:pc6 controlPoint2:pc7];
+    
     if ([cell state] == NSOnState) {
         // selected tab
-        NSRect tabRect = NSOffsetRect(NSInsetRect(cellFrame, 0.5, -10), 0, -10.5);
-        bezier = [NSBezierPath bezierPathWithRoundedRect:tabRect xRadius:5 yRadius:5];
         [lineColor set];
         [bezier setLineWidth:1.0];
 
@@ -358,11 +391,6 @@
         aRect.size.width += 1;
 
         // frame
-        [bezier moveToPoint:NSMakePoint(aRect.origin.x, aRect.origin.y)];
-        [bezier lineToPoint:NSMakePoint(aRect.origin.x + aRect.size.width, aRect.origin.y)];
-        if (!([cell tabState] & PSMTab_RightIsSelectedMask))
-            [bezier lineToPoint:NSMakePoint(aRect.origin.x + aRect.size.width, aRect.origin.y + aRect.size.height)];
-
         [bezier stroke];
     }
 
@@ -502,10 +530,18 @@
     // draw cells
     NSEnumerator *e = [[bar cells] objectEnumerator];
     PSMTabBarCell *cell;
+    PSMTabBarCell* selectedCell = nil;
+    
     while ((cell = [e nextObject])) {
-        if ([bar isAnimating] || (![cell isInOverflowMenu] && NSIntersectsRect([cell frame], rect)))
+        if ([cell state] == NSOnState)
+            selectedCell = cell;
+        else if ([bar isAnimating] || (![cell isInOverflowMenu] && NSIntersectsRect([cell frame], rect)))
             [cell drawWithFrame:[cell frame] inView:bar];
     }
+    
+    // Now draw the selected cell
+    if ([bar isAnimating] || (![selectedCell isInOverflowMenu] && NSIntersectsRect([selectedCell frame], rect)))
+            [selectedCell drawWithFrame:[selectedCell frame] inView:bar];
 }   	
 
 #pragma mark -
