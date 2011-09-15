@@ -169,7 +169,7 @@
 	NSRect totalFrame = NSUnionRect(tabBarFrame, tabViewFrame);
 
 	if(orientation == PSMTabBarHorizontalOrientation) {
-		tabBarFrame.size.height = [tabBar isTabBarHidden] ? 1 : 22;
+		tabBarFrame.size.height = [tabBar isTabBarHidden] ? 1 : kPSMTabBarControlHeight;
 		tabBarFrame.size.width = totalFrame.size.width;
 		tabBarFrame.origin.y = totalFrame.origin.y + totalFrame.size.height - tabBarFrame.size.height;
 		tabViewFrame.origin.x = 13;
@@ -418,10 +418,10 @@
 
 	if([(PSMTabBarControl *)[aTabView delegate] orientation] == PSMTabBarHorizontalOrientation) {
 		offset->width = [(id < PSMTabStyle >)[(PSMTabBarControl*)[aTabView delegate] style] leftMarginForTabBarControl];
-		offset->height = 22;
+		offset->height = kPSMTabBarControlHeight;
 	} else {
 		offset->width = 0;
-		offset->height = 22 + [(id < PSMTabStyle >)[(PSMTabBarControl*)[aTabView delegate] style] leftMarginForTabBarControl];
+		offset->height = kPSMTabBarControlHeight + [(id < PSMTabStyle >)[(PSMTabBarControl*)[aTabView delegate] style] leftMarginForTabBarControl];
 	}
 
 	if(styleMask) {

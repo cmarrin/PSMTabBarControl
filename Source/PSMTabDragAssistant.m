@@ -583,7 +583,7 @@ static PSMTabDragAssistant *sharedDragAssistant = nil;
 	}
 
 	if(*outMask | NSBorderlessWindowMask) {
-		_dragWindowOffset.height += 22;
+		_dragWindowOffset.height += kPSMTabBarControlHeight;
 	}
 
 	return viewImage;

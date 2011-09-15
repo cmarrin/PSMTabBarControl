@@ -338,7 +338,7 @@
 			break;
 		}
 
-		[bgImage drawInRect:cellFrame fromRect:NSMakeRect(0.0, 0.0, 1.0, 22.0) operation:NSCompositeSourceOver fraction:1.0];
+		[bgImage drawInRect:cellFrame fromRect:NSMakeRect(0.0, 0.0, 1.0, kPSMTabBarControlHeight) operation:NSCompositeSourceOver fraction:1.0];
 		[aquaDivider compositeToPoint:NSMakePoint(cellFrame.origin.x + cellFrame.size.width - 1.0, cellFrame.origin.y + cellFrame.size.height) operation:NSCompositeSourceOver];
 
 		aRect.size.height += 0.5;
@@ -364,11 +364,11 @@
 }
 
 - (void)drawBackgroundInRect:(NSRect)rect {
-	if(rect.size.height <= 22.0) {
+	if(rect.size.height <= kPSMTabBarControlHeight) {
 		//Draw for our whole bounds; it'll be automatically clipped to fit the appropriate drawing area
 		rect = [tabBar bounds];
 
-		[aquaTabBg drawInRect:rect fromRect:NSMakeRect(0.0, 0.0, 1.0, 22.0) operation:NSCompositeSourceOver fraction:1.0];
+		[aquaTabBg drawInRect:rect fromRect:NSMakeRect(0.0, 0.0, 1.0, kPSMTabBarControlHeight) operation:NSCompositeSourceOver fraction:1.0];
 	}
 }
 

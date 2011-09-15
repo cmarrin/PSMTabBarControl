@@ -726,35 +726,35 @@
 
 		if(partnerView) {
 			// above or below me?
-			if((myOriginalOrigin - 22) > partnerOriginalOrigin) {
+			if((myOriginalOrigin - kPSMTabBarControlHeight) > partnerOriginalOrigin) {
 				// partner is below me
 				if(_isHidden) {
 					// I'm shrinking
-					myTargetOrigin = myOriginalOrigin + 21;
-					myTargetSize = myOriginalSize - 21;
+					myTargetOrigin = myOriginalOrigin + (kPSMTabBarControlHeight - 1);
+					myTargetSize = myOriginalSize - (kPSMTabBarControlHeight - 1);
 					partnerTargetOrigin = partnerOriginalOrigin;
-					partnerTargetSize = partnerOriginalSize + 21;
+					partnerTargetSize = partnerOriginalSize + (kPSMTabBarControlHeight - 1);
 				} else {
 					// I'm growing
-					myTargetOrigin = myOriginalOrigin - 21;
-					myTargetSize = myOriginalSize + 21;
+					myTargetOrigin = myOriginalOrigin - (kPSMTabBarControlHeight - 1);
+					myTargetSize = myOriginalSize + (kPSMTabBarControlHeight - 1);
 					partnerTargetOrigin = partnerOriginalOrigin;
-					partnerTargetSize = partnerOriginalSize - 21;
+					partnerTargetSize = partnerOriginalSize - (kPSMTabBarControlHeight - 1);
 				}
 			} else {
 				// partner is above me
 				if(_isHidden) {
 					// I'm shrinking
 					myTargetOrigin = myOriginalOrigin;
-					myTargetSize = myOriginalSize - 21;
-					partnerTargetOrigin = partnerOriginalOrigin - 21;
-					partnerTargetSize = partnerOriginalSize + 21;
+					myTargetSize = myOriginalSize - (kPSMTabBarControlHeight - 1);
+					partnerTargetOrigin = partnerOriginalOrigin - (kPSMTabBarControlHeight - 1);
+					partnerTargetSize = partnerOriginalSize + (kPSMTabBarControlHeight - 1);
 				} else {
 					// I'm growing
 					myTargetOrigin = myOriginalOrigin;
-					myTargetSize = myOriginalSize + 21;
-					partnerTargetOrigin = partnerOriginalOrigin + 21;
-					partnerTargetSize = partnerOriginalSize - 21;
+					myTargetSize = myOriginalSize + (kPSMTabBarControlHeight - 1);
+					partnerTargetOrigin = partnerOriginalOrigin + (kPSMTabBarControlHeight - 1);
+					partnerTargetSize = partnerOriginalSize - (kPSMTabBarControlHeight - 1);
 				}
 			}
 		} else {
@@ -762,15 +762,15 @@
 			if(_isHidden) {
 				// I'm shrinking
 				myTargetOrigin = myOriginalOrigin;
-				myTargetSize = myOriginalSize - 21;
-				partnerTargetOrigin = partnerOriginalOrigin + 21;
-				partnerTargetSize = partnerOriginalSize - 21;
+				myTargetSize = myOriginalSize - (kPSMTabBarControlHeight - 1);
+				partnerTargetOrigin = partnerOriginalOrigin + (kPSMTabBarControlHeight - 1);
+				partnerTargetSize = partnerOriginalSize - (kPSMTabBarControlHeight - 1);
 			} else {
 				// I'm growing
 				myTargetOrigin = myOriginalOrigin;
-				myTargetSize = myOriginalSize + 21;
-				partnerTargetOrigin = partnerOriginalOrigin - 21;
-				partnerTargetSize = partnerOriginalSize + 21;
+				myTargetSize = myOriginalSize + (kPSMTabBarControlHeight - 1);
+				partnerTargetOrigin = partnerOriginalOrigin - (kPSMTabBarControlHeight - 1);
+				partnerTargetSize = partnerOriginalSize + (kPSMTabBarControlHeight - 1);
 			}
 		}
 	} else {   /* vertical */
@@ -1161,9 +1161,9 @@
 
 	if(window) {
 		NSRect resizeWidgetFrame = [[window contentView] frame];
-		resizeWidgetFrame.origin.x += resizeWidgetFrame.size.width - 22;
-		resizeWidgetFrame.size.width = 22;
-		resizeWidgetFrame.size.height = 22;
+		resizeWidgetFrame.origin.x += resizeWidgetFrame.size.width - kPSMTabBarControlHeight;
+		resizeWidgetFrame.size.width = kPSMTabBarControlHeight;
+		resizeWidgetFrame.size.height = kPSMTabBarControlHeight;
 
 		if([window showsResizeIndicator] && NSIntersectsRect([self frame], resizeWidgetFrame)) {
 			//the resize widgets are larger on metal windows
@@ -1576,22 +1576,22 @@
 			if(partnerView) {
 				NSRect partnerFrame = [partnerView frame];
 				// above or below me?
-				if(myFrame.origin.y - 22 > [partnerView frame].origin.y) {
+				if(myFrame.origin.y - kPSMTabBarControlHeight > [partnerView frame].origin.y) {
 					// partner is below me
-					[self setFrame:NSMakeRect(myFrame.origin.x, myFrame.origin.y + 21, myFrame.size.width, myFrame.size.height - 21)];
-					[partnerView setFrame:NSMakeRect(partnerFrame.origin.x, partnerFrame.origin.y, partnerFrame.size.width, partnerFrame.size.height + 21)];
+					[self setFrame:NSMakeRect(myFrame.origin.x, myFrame.origin.y + (kPSMTabBarControlHeight - 1), myFrame.size.width, myFrame.size.height - (kPSMTabBarControlHeight - 1))];
+					[partnerView setFrame:NSMakeRect(partnerFrame.origin.x, partnerFrame.origin.y, partnerFrame.size.width, partnerFrame.size.height + (kPSMTabBarControlHeight - 1))];
 				} else {
 					// partner is above me
-					[self setFrame:NSMakeRect(myFrame.origin.x, myFrame.origin.y, myFrame.size.width, myFrame.size.height - 21)];
-					[partnerView setFrame:NSMakeRect(partnerFrame.origin.x, partnerFrame.origin.y - 21, partnerFrame.size.width, partnerFrame.size.height + 21)];
+					[self setFrame:NSMakeRect(myFrame.origin.x, myFrame.origin.y, myFrame.size.width, myFrame.size.height - (kPSMTabBarControlHeight - 1))];
+					[partnerView setFrame:NSMakeRect(partnerFrame.origin.x, partnerFrame.origin.y - (kPSMTabBarControlHeight - 1), partnerFrame.size.width, partnerFrame.size.height + (kPSMTabBarControlHeight - 1))];
 				}
 				[partnerView setNeedsDisplay:YES];
 				[self setNeedsDisplay:YES];
 			} else {
 				// for window movement
 				NSRect windowFrame = [[self window] frame];
-				[[self window] setFrame:NSMakeRect(windowFrame.origin.x, windowFrame.origin.y + 21, windowFrame.size.width, windowFrame.size.height - 21) display:YES];
-				[self setFrame:NSMakeRect(myFrame.origin.x, myFrame.origin.y, myFrame.size.width, myFrame.size.height - 21)];
+				[[self window] setFrame:NSMakeRect(windowFrame.origin.x, windowFrame.origin.y + (kPSMTabBarControlHeight - 1), windowFrame.size.width, windowFrame.size.height - (kPSMTabBarControlHeight - 1)) display:YES];
+				[self setFrame:NSMakeRect(myFrame.origin.x, myFrame.origin.y, myFrame.size.width, myFrame.size.height - (kPSMTabBarControlHeight - 1))];
 			}
 		} else {
 			if(partnerView) {
@@ -1831,11 +1831,11 @@
 #pragma mark IB Palette
 
 - (NSSize)minimumFrameSizeFromKnobPosition:(NSInteger)position {
-	return NSMakeSize(100.0, 22.0);
+	return NSMakeSize(100.0, kPSMTabBarControlHeight);
 }
 
 - (NSSize)maximumFrameSizeFromKnobPosition:(NSInteger)knobPosition {
-	return NSMakeSize(10000.0, 22.0);
+	return NSMakeSize(10000.0, kPSMTabBarControlHeight);
 }
 
 - (void)placeView:(NSRect)newFrame {

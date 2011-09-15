@@ -7,6 +7,8 @@
 //
 
 #import "PSMTabDragWindow.h"
+
+#import "PSMTabBarControl.h"
 #import "PSMTabDragView.h"
 
 @implementation PSMTabDragWindow
@@ -33,7 +35,7 @@
 		windowFrame.size = size;
 
 		if(styleMask | NSBorderlessWindowMask) {
-			windowFrame.size.height += 22;
+			windowFrame.size.height += kPSMTabBarControlHeight;
 		}
 
 		[self setFrame:windowFrame display:YES];

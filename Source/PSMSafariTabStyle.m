@@ -30,11 +30,21 @@ StaticImage(TabClose_Front_Rollover)
 StaticImage(TabClose_Dirty)
 StaticImage(TabClose_Dirty_Pressed)
 StaticImage(TabClose_Dirty_Rollover)
-StaticImage(TabNewSafari)
-StaticImage(TabNewSafariPressed)
-StaticImage(TabNewSafariRollover)
+StaticImage(TabNew)
+StaticImage(TabNew_Pressed)
+StaticImage(TabNew_Rollover)
+StaticImage(SafariAWATFill)
+StaticImage(SafariAWATLeftCap)
+StaticImage(SafariAWATRightCap)
 StaticImage(SafariAWBG)
+StaticImage(SafariAWITLeftCap)
+StaticImage(SafariAWITRightCap)
+StaticImage(SafariIWATFill)
+StaticImage(SafariIWATLeftCap)
+StaticImage(SafariIWATRightCap)
 StaticImage(SafariIWBG)
+StaticImage(SafariIWITLeftCap)
+StaticImage(SafariIWITRightCap)
 
 - (NSString *)name {
 	return @"Safari";
@@ -81,15 +91,15 @@ StaticImage(SafariIWBG)
 #pragma mark Add Tab Button
 
 - (NSImage *)addTabButtonImage {
-	return _staticTabNewSafariImage();
+	return _staticTabNewImage();
 }
 
 - (NSImage *)addTabButtonPressedImage {
-	return _staticTabNewSafariPressedImage();
+	return _staticTabNew_PressedImage();
 }
 
 - (NSImage *)addTabButtonRolloverImage {
-	return _staticTabNewSafariRolloverImage();
+	return _staticTabNew_RolloverImage();
 }
 
 #pragma mark -
@@ -321,78 +331,33 @@ StaticImage(SafariIWBG)
 #pragma mark ---- drawing ----
 
 - (void)drawTabCell:(PSMTabBarCell *)cell {
-    NSRect cellFrame = [cell frame];	
-    NSColor *lineColor = [NSColor darkGrayColor];
+    NSRect cellFrame = NSInsetRect([cell frame], -5, 0);
     
-    NSBezierPath *bezier = [NSBezierPath bezierPath];
+    if ([[cell controlView] frame].size.height < 2)
+        return;
+        
+    NSImage* left = nil;
+    NSImage* center = nil;
+    NSImage* right = nil;
     
-    NSRect tabRect = cellFrame;
-    
-    NSPoint p0 = NSMakePoint(tabRect.origin.x, tabRect.origin.y);
-    NSPoint pc0 = NSMakePoint(tabRect.origin.x + 2, tabRect.origin.y);
-    NSPoint pc1 = NSMakePoint(tabRect.origin.x + 5, tabRect.origin.y + 3);
-    NSPoint p1 = NSMakePoint(tabRect.origin.x + 5, tabRect.origin.y + 5);
-    
-    NSPoint p2 = NSMakePoint(tabRect.origin.x + 5, tabRect.origin.y + tabRect.size.height - 5);
-    NSPoint pc2 = NSMakePoint(tabRect.origin.x + 5, tabRect.origin.y + tabRect.size.height - 3);
-    NSPoint pc3 = NSMakePoint(tabRect.origin.x + 8, tabRect.origin.y + tabRect.size.height);
-    NSPoint p3 = NSMakePoint(tabRect.origin.x + 10, tabRect.origin.y + tabRect.size.height);
-    
-    NSPoint p4 = NSMakePoint(tabRect.origin.x + tabRect.size.width - 10, tabRect.origin.y + tabRect.size.height);
-    NSPoint pc4 = NSMakePoint(tabRect.origin.x + tabRect.size.width - 8, tabRect.origin.y + tabRect.size.height);
-    NSPoint pc5 = NSMakePoint(tabRect.origin.x + tabRect.size.width - 5, tabRect.origin.y + tabRect.size.height - 3);
-    NSPoint p5 = NSMakePoint(tabRect.origin.x + tabRect.size.width - 5, tabRect.origin.y + tabRect.size.height - 5);
-    
-    NSPoint p6 = NSMakePoint(tabRect.origin.x + tabRect.size.width - 5, tabRect.origin.y + 5);
-    NSPoint pc6 = NSMakePoint(tabRect.origin.x + tabRect.size.width - 5, tabRect.origin.y + 3);
-    NSPoint pc7 = NSMakePoint(tabRect.origin.x + tabRect.size.width - 2, tabRect.origin.y);
-    NSPoint p7 = NSMakePoint(tabRect.origin.x + tabRect.size.width, tabRect.origin.y);
-    
-    [bezier moveToPoint:p0];
-    [bezier curveToPoint:p1 controlPoint1:pc0 controlPoint2:pc1];
-    [bezier lineToPoint:p2];
-    
-    [bezier curveToPoint:p3 controlPoint1:pc2 controlPoint2:pc3];
-    [bezier lineToPoint:p4];
-    
-    [bezier curveToPoint:p5 controlPoint1:pc4 controlPoint2:pc5];
-    [bezier lineToPoint:p6];
-    
-    [bezier curveToPoint:p7 controlPoint1:pc6 controlPoint2:pc7];
-    
-    if ([cell state] == NSOnState) {
-        // selected tab
-        [lineColor set];
-        [bezier setLineWidth:1.0];
-
-        // special case of hidden control; need line across top of cell
-        if ([[cell controlView] frame].size.height < 2)
-            NSRectFillUsingOperation(tabRect, NSCompositeSourceOver);
-        else {
-            // background
-            [NSGraphicsContext saveGraphicsState];
-            [bezier addClip];
-            NSDrawWindowBackground(cellFrame);
-            [NSGraphicsContext restoreGraphicsState];
-          
-            [bezier stroke];
-        }
+    if ([[[tabBar tabView] window] isKeyWindow]) {
+        if ([cell state] == NSOnState) {
+            left = _staticSafariAWATLeftCapImage();
+            center = _staticSafariAWATFillImage();
+            right = _staticSafariAWATRightCapImage();
+        } else
+            left = _staticSafariAWITLeftCapImage();
     } else {
-        // unselected tab
-        NSRect aRect = NSMakeRect(cellFrame.origin.x, cellFrame.origin.y, cellFrame.size.width, cellFrame.size.height);
-        aRect.origin.y += 0.5;
-        aRect.origin.x += 1.5;
-        aRect.size.width -= 1;
-          
-        [lineColor set];
-
-        aRect.origin.x -= 1;
-        aRect.size.width += 1;
-
-        // frame
-        [bezier stroke];
+        if ([cell state] == NSOnState) {
+            left = _staticSafariIWATLeftCapImage();
+            center = _staticSafariIWATFillImage();
+            right = _staticSafariIWATRightCapImage();
+        } else
+            left = _staticSafariIWITLeftCapImage();
     }
 
+    NSDrawThreePartImage(cellFrame, left, center, right, NO, NSCompositeSourceOver, 1, [tabBar isFlipped]);
+    
     [self drawInteriorWithTabCell:cell inView:[cell controlView]];
 }
 
@@ -480,11 +445,16 @@ StaticImage(SafariIWBG)
 	rect = [tabBar bounds];
 	
 	[NSGraphicsContext saveGraphicsState];
-	[[NSGraphicsContext currentContext] setShouldAntialias:NO];
 
-    NSImage* bg = [[[tabBar tabView] window] isKeyWindow] ? _staticSafariAWBGImage() : _staticSafariIWBGImage();
-    NSDrawThreePartImage(rect, nil, bg, nil, NO, NSCompositeCopy, 1, YES);
-
+    // special case of hidden control; need line across top of cell
+    if (rect.size.height < 2) {
+        [[NSColor darkGrayColor] set];
+        NSRectFillUsingOperation(rect, NSCompositeSourceOver);
+    } else {
+        NSImage* bg = [[[tabBar tabView] window] isKeyWindow] ? _staticSafariAWBGImage() : _staticSafariIWBGImage();
+        NSDrawThreePartImage(rect, nil, bg, nil, NO, NSCompositeCopy, 1, [tabBar isFlipped]);
+    }
+    
 	[NSGraphicsContext restoreGraphicsState];
 }
 
