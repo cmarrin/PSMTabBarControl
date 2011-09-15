@@ -15,6 +15,25 @@
 
 @implementation PSMSafariTabStyle
 
+#define StaticImage(name) \
+static NSImage* _static##name##Image() \
+{ \
+    static NSImage* image = nil; \
+    if (!image) \
+        image = [[NSImage alloc] initByReferencingFile:[[PSMTabBarControl bundle] pathForImageResource:@#name]]; \
+    return image; \
+}
+
+StaticImage(TabClose_Front)
+StaticImage(TabClose_Front_Pressed)
+StaticImage(TabClose_Front_Rollover)
+StaticImage(TabClose_Dirty)
+StaticImage(TabClose_Dirty_Pressed)
+StaticImage(TabClose_Dirty_Rollover)
+StaticImage(TabNewSafari)
+StaticImage(TabNewSafariPressed)
+StaticImage(TabNewSafariRollover)
+
 - (NSString *)name {
 	return @"Safari";
 }
@@ -24,18 +43,6 @@
 
 - (id) init {
 	if((self = [super init])) {
-		_closeButton = [[NSImage alloc] initByReferencingFile:[[PSMTabBarControl bundle] pathForImageResource:@"TabClose_Front"]];
-		_closeButtonDown = [[NSImage alloc] initByReferencingFile:[[PSMTabBarControl bundle] pathForImageResource:@"TabClose_Front_Pressed"]];
-		_closeButtonOver = [[NSImage alloc] initByReferencingFile:[[PSMTabBarControl bundle] pathForImageResource:@"TabClose_Front_Rollover"]];
-
-		_closeDirtyButton = [[NSImage alloc] initByReferencingFile:[[PSMTabBarControl bundle] pathForImageResource:@"TabClose_Dirty"]];
-		_closeDirtyButtonDown = [[NSImage alloc] initByReferencingFile:[[PSMTabBarControl bundle] pathForImageResource:@"TabClose_Dirty_Pressed"]];
-		_closeDirtyButtonOver = [[NSImage alloc] initByReferencingFile:[[PSMTabBarControl bundle] pathForImageResource:@"TabClose_Dirty_Rollover"]];
-
-		_addTabButtonImage = [[NSImage alloc] initByReferencingFile:[[PSMTabBarControl bundle] pathForImageResource:@"TabNewSafari"]];
-		_addTabButtonPressedImage = [[NSImage alloc] initByReferencingFile:[[PSMTabBarControl bundle] pathForImageResource:@"TabNewSafariPressed"]];
-		_addTabButtonRolloverImage = [[NSImage alloc] initByReferencingFile:[[PSMTabBarControl bundle] pathForImageResource:@"TabNewSafariRollover"]];
-
 		_objectCountStringAttributes = [[NSDictionary alloc] initWithObjectsAndKeys:[[NSFontManager sharedFontManager] convertFont:[NSFont fontWithName:@"Helvetica" size:11.0] toHaveTrait:NSBoldFontMask], NSFontAttributeName,
 										[[NSColor whiteColor] colorWithAlphaComponent:0.85], NSForegroundColorAttributeName,
 										nil, nil];
@@ -44,16 +51,6 @@
 }
 
 - (void)dealloc {
-	[_closeButton release];
-	[_closeButtonDown release];
-	[_closeButtonOver release];
-	[_closeDirtyButton release];
-	[_closeDirtyButtonDown release];
-	[_closeDirtyButtonOver release];
-	[_addTabButtonImage release];
-	[_addTabButtonPressedImage release];
-	[_addTabButtonRolloverImage release];
-
 	[_objectCountStringAttributes release];
 
 	[super dealloc];
@@ -82,15 +79,15 @@
 #pragma mark Add Tab Button
 
 - (NSImage *)addTabButtonImage {
-	return _addTabButtonImage;
+	return _staticTabNewSafariImage();
 }
 
 - (NSImage *)addTabButtonPressedImage {
-	return _addTabButtonPressedImage;
+	return _staticTabNewSafariPressedImage();
 }
 
 - (NSImage *)addTabButtonRolloverImage {
-	return _addTabButtonRolloverImage;
+	return _staticTabNewSafariRolloverImage();
 }
 
 #pragma mark -
@@ -122,7 +119,7 @@
 	}
 
 	NSRect result;
-	result.size = [_closeButton size];
+	result.size = [_staticTabClose_FrontImage() size];
 	result.origin.x = cellFrame.origin.x + MARGIN_X;
 	result.origin.y = cellFrame.origin.y + MARGIN_Y + 2.0;
 
@@ -146,7 +143,7 @@
 	result.origin.y = cellFrame.origin.y + MARGIN_Y;
 
 	if([cell hasCloseButton] && ![cell isCloseButtonSuppressed]) {
-		result.origin.x += [_closeButton size].width + kPSMTabBarCellPadding;
+		result.origin.x += [_staticTabClose_FrontImage() size].width + kPSMTabBarCellPadding;
 	}
 
 	if([cell state] == NSOnState) {
@@ -209,7 +206,7 @@
 
 	// close button?
 	if([cell hasCloseButton] && ![cell isCloseButtonSuppressed]) {
-		resultWidth += [_closeButton size].width + kPSMTabBarCellPadding;
+		resultWidth += [_staticTabClose_FrontImage() size].width + kPSMTabBarCellPadding;
 	}
 
 	// icon?
@@ -244,7 +241,7 @@
 
 	// close button?
 	if([cell hasCloseButton] && ![cell isCloseButtonSuppressed]) {
-		resultWidth += [_closeButton size].width + kPSMTabBarCellPadding;
+		resultWidth += [_staticTabClose_FrontImage() size].width + kPSMTabBarCellPadding;
 	}
 
 	// icon?
@@ -408,9 +405,9 @@
         NSRect closeButtonRect = [cell closeButtonRectForFrame:cellFrame];
         NSImage *closeButton = nil;
 
-        closeButton = [cell isEdited] ? _closeDirtyButton : _closeButton;
-        if ([cell closeButtonOver]) closeButton = [cell isEdited] ? _closeDirtyButtonOver : _closeButtonOver;
-        if ([cell closeButtonPressed]) closeButton = [cell isEdited] ? _closeDirtyButtonDown : _closeButtonDown;
+        closeButton = [cell isEdited] ? _staticTabClose_DirtyImage() : _staticTabClose_FrontImage();
+        if ([cell closeButtonOver]) closeButton = [cell isEdited] ? _staticTabClose_Dirty_RolloverImage() : _staticTabClose_Front_RolloverImage();
+        if ([cell closeButtonPressed]) closeButton = [cell isEdited] ? _staticTabClose_Dirty_PressedImage() : _staticTabClose_Front_PressedImage();
 
         closeButtonSize = [closeButton size];
         if ([controlView isFlipped])
@@ -543,41 +540,5 @@
     if ([bar isAnimating] || (![selectedCell isInOverflowMenu] && NSIntersectsRect([selectedCell frame], rect)))
             [selectedCell drawWithFrame:[selectedCell frame] inView:bar];
 }   	
-
-#pragma mark -
-#pragma mark Archiving
-
-- (void)encodeWithCoder:(NSCoder *)aCoder {
-	//[super encodeWithCoder:aCoder];
-	if([aCoder allowsKeyedCoding]) {
-		[aCoder encodeObject:_closeButton forKey:@"closeButton"];
-		[aCoder encodeObject:_closeButtonDown forKey:@"closeButtonDown"];
-		[aCoder encodeObject:_closeButtonOver forKey:@"closeButtonOver"];
-		[aCoder encodeObject:_closeDirtyButton forKey:@"closeDirtyButton"];
-		[aCoder encodeObject:_closeDirtyButtonDown forKey:@"closeDirtyButtonDown"];
-		[aCoder encodeObject:_closeDirtyButtonOver forKey:@"closeDirtyButtonOver"];
-		[aCoder encodeObject:_addTabButtonImage forKey:@"addTabButtonImage"];
-		[aCoder encodeObject:_addTabButtonPressedImage forKey:@"addTabButtonPressedImage"];
-		[aCoder encodeObject:_addTabButtonRolloverImage forKey:@"addTabButtonRolloverImage"];
-	}
-}
-
-- (id)initWithCoder:(NSCoder *)aDecoder {
-	// self = [super initWithCoder:aDecoder];
-	//if (self) {
-	if([aDecoder allowsKeyedCoding]) {
-		_closeButton = [[aDecoder decodeObjectForKey:@"closeButton"] retain];
-		_closeButtonDown = [[aDecoder decodeObjectForKey:@"closeButtonDown"] retain];
-		_closeButtonOver = [[aDecoder decodeObjectForKey:@"closeButtonOver"] retain];
-		_closeDirtyButton = [[aDecoder decodeObjectForKey:@"closeDirtyButton"] retain];
-		_closeDirtyButtonDown = [[aDecoder decodeObjectForKey:@"closeDirtyButtonDown"] retain];
-		_closeDirtyButtonOver = [[aDecoder decodeObjectForKey:@"closeDirtyButtonOver"] retain];
-		_addTabButtonImage = [[aDecoder decodeObjectForKey:@"addTabButtonImage"] retain];
-		_addTabButtonPressedImage = [[aDecoder decodeObjectForKey:@"addTabButtonPressedImage"] retain];
-		_addTabButtonRolloverImage = [[aDecoder decodeObjectForKey:@"addTabButtonRolloverImage"] retain];
-	}
-	//}
-	return self;
-}
 
 @end
