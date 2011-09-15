@@ -1979,6 +1979,27 @@
 	return cellCount;
 }
 
+- (BOOL)isToRightOfSelectedTab:(PSMTabBarCell*)cell
+{
+    if ([cell isInOverflowMenu])
+        return NO;
+        
+	NSInteger i, cellCount = [_cells count];
+	for (i = 0; i < cellCount; i++) {
+        PSMTabBarCell* currentCell = [_cells objectAtIndex:i];
+        if (currentCell == cell)
+            return NO;
+        if ([currentCell state] == NSOnState)
+            return YES;
+	}
+    return NO;
+}
+
+- (BOOL)isFirstTab:(PSMTabBarCell*)cell
+{
+    return [_cells objectAtIndex:0] == cell;
+}
+
 #pragma mark -
 #pragma mark Accessibility
 

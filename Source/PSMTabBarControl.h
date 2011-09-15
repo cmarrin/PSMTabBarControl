@@ -18,7 +18,7 @@
 #define kPSMTabBarControlHeight			24
 // internal cell border
 #define MARGIN_X								6
-#define MARGIN_Y								3
+#define MARGIN_Y								4
 // padding between objects
 #define kPSMTabBarCellPadding				4
 // fixed size objects
@@ -182,6 +182,8 @@ enum {
 - (NSMutableArray *)representedTabViewItems;
 - (NSInteger)numberOfVisibleTabs;
 - (PSMTabBarCell *)lastVisibleTab;
+- (BOOL)isToRightOfSelectedTab:(PSMTabBarCell*)cell;
+- (BOOL)isFirstTab:(PSMTabBarCell*)cell;
 
 // special effects
 - (void)hideTabBar:(BOOL) hide animate:(BOOL)animate;

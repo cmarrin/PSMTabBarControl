@@ -333,6 +333,7 @@ StaticImage(SafariIWITRightCap)
 - (void)drawTabCell:(PSMTabBarCell *)cell {
     NSRect cellFrame = NSInsetRect([cell frame], -5, 0);
     
+    
     if ([[cell controlView] frame].size.height < 2)
         return;
         
@@ -345,15 +346,26 @@ StaticImage(SafariIWITRightCap)
             left = _staticSafariAWATLeftCapImage();
             center = _staticSafariAWATFillImage();
             right = _staticSafariAWATRightCapImage();
-        } else
-            left = _staticSafariAWITLeftCapImage();
+        } else {
+            if (![tabBar isFirstTab:cell]) {
+                if ([tabBar isToRightOfSelectedTab:cell])
+                    right = _staticSafariAWITRightCapImage();
+                else
+                    left = _staticSafariAWITLeftCapImage();
+            }
+        }
     } else {
         if ([cell state] == NSOnState) {
             left = _staticSafariIWATLeftCapImage();
             center = _staticSafariIWATFillImage();
             right = _staticSafariIWATRightCapImage();
         } else
-            left = _staticSafariIWITLeftCapImage();
+            if (![tabBar isFirstTab:cell]) {
+                if ([tabBar isToRightOfSelectedTab:cell])
+                    right = _staticSafariIWITRightCapImage();
+                else
+                    left = _staticSafariIWITLeftCapImage();
+            }
     }
 
     NSDrawThreePartImage(cellFrame, left, center, right, NO, NSCompositeSourceOver, 1, [tabBar isFlipped]);
@@ -489,18 +501,11 @@ StaticImage(SafariIWITRightCap)
     // draw cells
     NSEnumerator *e = [[bar cells] objectEnumerator];
     PSMTabBarCell *cell;
-    PSMTabBarCell* selectedCell = nil;
     
     while ((cell = [e nextObject])) {
-        if ([cell state] == NSOnState)
-            selectedCell = cell;
-        else if ([bar isAnimating] || (![cell isInOverflowMenu] && NSIntersectsRect([cell frame], rect)))
+        if ([bar isAnimating] || (![cell isInOverflowMenu] && NSIntersectsRect([cell frame], rect)))
             [cell drawWithFrame:[cell frame] inView:bar];
     }
-    
-    // Now draw the selected cell
-    if ([bar isAnimating] || (![selectedCell isInOverflowMenu] && NSIntersectsRect([selectedCell frame], rect)))
-            [selectedCell drawWithFrame:[selectedCell frame] inView:bar];
 }   	
 
 @end
