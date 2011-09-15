@@ -33,6 +33,8 @@ StaticImage(TabClose_Dirty_Rollover)
 StaticImage(TabNewSafari)
 StaticImage(TabNewSafariPressed)
 StaticImage(TabNewSafariRollover)
+StaticImage(SafariAWBG)
+StaticImage(SafariIWBG)
 
 - (NSString *)name {
 	return @"Safari";
@@ -480,19 +482,9 @@ StaticImage(TabNewSafariRollover)
 	[NSGraphicsContext saveGraphicsState];
 	[[NSGraphicsContext currentContext] setShouldAntialias:NO];
 
-    [[NSColor colorWithCalibratedWhite:0.0 alpha:0.1] set];
-    NSRectFillUsingOperation(rect, NSCompositeSourceAtop);
-  
-    NSGradient *shadow = [[NSGradient alloc ] initWithStartingColor:[NSColor colorWithDeviceWhite:0 alpha:0.15] endingColor:[NSColor clearColor]];
-    NSRect shadowRect = NSMakeRect(rect.origin.x, rect.origin.y, rect.size.width, 7);
-    [shadow drawInRect:shadowRect angle:90];
-    [shadow release];
-  
-	[[NSColor darkGrayColor] set];
-	
-    [NSBezierPath strokeLineFromPoint:NSMakePoint(rect.origin.x, rect.origin.y + 0.5) toPoint:NSMakePoint(rect.origin.x + rect.size.width, rect.origin.y + 0.5)];
-    [NSBezierPath strokeLineFromPoint:NSMakePoint(rect.origin.x, rect.origin.y + rect.size.height - 0.5) toPoint:NSMakePoint(rect.origin.x + rect.size.width, rect.origin.y + rect.size.height - 0.5)];
-	
+    NSImage* bg = [[[tabBar tabView] window] isKeyWindow] ? _staticSafariAWBGImage() : _staticSafariIWBGImage();
+    NSDrawThreePartImage(rect, nil, bg, nil, NO, NSCompositeCopy, 1, YES);
+
 	[NSGraphicsContext restoreGraphicsState];
 }
 
